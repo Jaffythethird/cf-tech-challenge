@@ -1,4 +1,4 @@
-# cf-tech-challenge
+# CF Tech Challenge
 ## Introduction
 Hello! If you're reading this, you're probably from the company that asked me to do this tech challenge. I'll do my best to be as comprehensive as possible without disclosing the entirety of the challenge rules, though reading through the code might have an effect on that.
 
