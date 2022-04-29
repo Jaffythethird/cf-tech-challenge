@@ -1,6 +1,6 @@
 # CF Tech Challenge
 ## Introduction
-Hello! If you're reading this, you're probably from the company that asked me to do this tech challenge. I'll do my best to be as comprehensive as possible without disclosing the entirety of the challenge rules, though reading through the code might have an effect on that.
+Hello! If you're reading this, you're probably from the company that asked me to do this tech challenge. The documentation for this project will be sent to my recruiter in PDF format.
 
 ## Getting Started
 Note: This code is tested and run on terraform version 1.1.9
