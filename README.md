@@ -4,6 +4,7 @@ Hello! If you're reading this, you're probably from the company that asked me to
 
 ## Getting Started
 Note: This code is tested and run on terraform version 1.1.9
+
 After cloning the repo and entering the project's root directory, run the following:
 ```
 terraform init
