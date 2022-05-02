@@ -9,6 +9,12 @@ resource "aws_s3_object" "images_folder" {
     content_type = "application/x-directory"
 }
 
+resource "aws_s3_object" "logs_folder" {
+    bucket = aws_s3_bucket.base.id
+    key = "Logs/"
+    content_type = "application/x-directory"
+}
+
 resource "aws_s3_bucket_lifecycle_configuration" "both" {
     bucket = aws_s3_bucket.base.id
 
