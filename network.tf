@@ -96,12 +96,6 @@ resource "aws_route_table_association" "sub2-public"{
 #   Security Groups   #
 #######################
 
-# Learn our public IP address for making sure the person deploying is the only person able to get through the sg
-# Directly taken from https://www.reddit.com/r/Terraform/comments/9g62ox/comment/e620jyu/?utm_source=share&utm_medium=web2x&context=3
-data "http" "icanhazip" {
-   url = "http://icanhazip.com"
-}
-
 resource "aws_security_group" "asg-sg" {
     vpc_id = "${aws_vpc.main.id}"
     
@@ -116,14 +110,14 @@ resource "aws_security_group" "asg-sg" {
         from_port = 80
         to_port = 80
         protocol = "tcp"
-        cidr_blocks = ["${chomp(data.http.icanhazip.body)}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
     
     ingress {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${chomp(data.http.icanhazip.body)}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }
 
@@ -141,6 +135,6 @@ resource "aws_security_group" "allow_ssh" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${chomp(data.http.icanhazip.body)}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }
