@@ -1,0 +1,26 @@
+###########
+#   ASG   #
+###########
+
+resource "aws_autoscaling_group" "main"{
+    name = "httpd-servers"
+    min_size = var.asg_min
+    max_size = var.asg_max
+    desired_capacity = var.asg_min
+    launch_configuration = aws_launch_configuration.main.name
+    vpc_zone_identifier = var.subnet_ids
+    target_group_arns = TODO
+}
+
+resource "aws_launch_configuration" "main" {
+    name = "httpd-server"
+    image_id = var.ami
+    instance_type = var.instance_type
+    user_data = var.user_data
+    root_block_device {
+        volume_size = var.ebs-size
+    }
+    security_groups = vpc_security_group_ids
+
+    key_name = var.key_name
+}
