@@ -47,6 +47,7 @@ module "private_instances" {
     # Instance Info
     ami = var.rhel_ami
     instance_type = "t2.micro"
+    ebs-size = 20
     user_data = file("./src/user-data/install-apache.sh")
     key_name = aws_key_pair.deployer-key.id
     private_key = file(var.private_key_path)
