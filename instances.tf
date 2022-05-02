@@ -23,7 +23,7 @@
 resource "aws_instance" "public_instance" {
     ami = var.rhel_ami
     instance_type = "t2.micro"
-    subnet_id = aws_subnet.public_sub_2.id
+    subnet_id = aws_subnet.sub2.id
     vpc_security_group_ids = aws_security_group.allow_ssh.id
 
     # SSH
@@ -39,6 +39,22 @@ resource "aws_instance" "public_instance" {
 #########################
 module "private_instances" {
     source = "./modules/asg-cluster"
+
+    # Instance Info
+    ami = var.rhel_ami
+    instance_type = "t2.micro"
+    user_data = file("./src/user-data/install-apache.sh")
+    key_name = aws_key_pair.deployer-key.id
+    private_key = file(var.private_key_path)
+
+    # Networking
+    vpc_security_group_ids = aws_security_group.allow_ssh.id
+    subnet_ids = [aws_subnet.sub3.id, aws_subnet.sub4.id]
+
+
+    # ASG/ALB Values
+    asg_min = 2
+    asg_max = 6
 }
 
 ###########
