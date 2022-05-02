@@ -24,7 +24,11 @@ resource "aws_instance" "public_instance" {
     ami = var.rhel_ami
     instance_type = "t2.micro"
     subnet_id = aws_subnet.sub2.id
-    vpc_security_group_ids = aws_security_group.allow_ssh.id
+    vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+
+    root_block_device {
+        volume_size = 20
+    }
 
     # SSH
     key_name = aws_key_pair.deployer-key.id
@@ -48,7 +52,7 @@ module "private_instances" {
     private_key = file(var.private_key_path)
 
     # Networking
-    vpc_security_group_ids = aws_security_group.allow_ssh.id
+    vpc_security_group_ids = [aws_security_group.allow_ssh.id]
     subnet_ids = [aws_subnet.sub3.id, aws_subnet.sub4.id]
 
 
