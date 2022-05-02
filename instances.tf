@@ -54,7 +54,7 @@ module "private_instances" {
     # Networking
     vpc_security_group_ids = [aws_security_group.allow_ssh.id]
     subnet_ids = [aws_subnet.sub3.id, aws_subnet.sub4.id]
-
+    vpc_id = aws_vpc.main.id
 
     # ASG/ALB Values
     asg_min = 2

@@ -33,6 +33,9 @@ variable "subnet_ids" {
 }
 
 # ASG/ALB Values
+variable "vpc_id" {
+}
+
 variable "asg_min" {
     type = number
 }
