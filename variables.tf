@@ -14,3 +14,8 @@ variable "pub_key_path" {
     description = "The path from your running directory to the public ssh key file to be passed to the instances"
     type = "string"
 }
+
+variable "private_key_path" {
+    description = "The path from your running directory to the private ssh key file to be passed to the instances"
+    type = "string"
+}

@@ -26,6 +26,12 @@ resource "aws_instance" "public_instance" {
     subnet_id = aws_subnet.public_sub_2.id
     vpc_security_group_ids = aws_security_group.allow_ssh.id
 
+    # SSH
+    key_name = aws_key_pair.deployer-key.id
+    connection {
+        user = "ec2-user"
+        private_key = file(var.private_key_path)
+    }
 }
 
 #########################
@@ -38,7 +44,7 @@ module "private_instances" {
 ###########
 #   SSH   #
 ###########
-resource "aws_key_pair" "deployer" {
+resource "aws_key_pair" "deployer-key" {
   key_name   = "deployer-key"
   public_key = file(var.pub_key_path)
 }
