@@ -21,8 +21,6 @@ resource "aws_launch_configuration" "main" {
         volume_size = var.ebs-size
     }
     security_groups = var.vpc_security_group_ids
-
-    key_name = var.key_name
 }
 
 ###########
@@ -37,7 +35,7 @@ resource "aws_lb" "main" {
 resource "aws_lb_listener" "main" {
     load_balancer_arn = aws_lb.main.arn
     port = 80
-    protocol = "TCP"
+    protocol = "HTTP"
     default_action {
         type = "forward"
         target_group_arn = aws_lb_target_group.main.arn
@@ -46,7 +44,7 @@ resource "aws_lb_listener" "main" {
 
 resource "aws_lb_target_group" "main" {
     port = 8080
-    protocol = "TCP"    
+    protocol = "HTTP"    
     target_type = "instance"
     vpc_id = var.vpc_id
 }

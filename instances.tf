@@ -31,11 +31,7 @@ resource "aws_instance" "public_instance" {
     }
 
     # SSH
-    key_name = aws_key_pair.deployer-key.id
-    connection {
-        user = "ec2-user"
-        private_key = file(var.private_key_path)
-    }
+    key_name = var.keypair_name
 }
 
 #########################
@@ -49,8 +45,6 @@ module "private_instances" {
     instance_type = "t2.micro"
     ebs-size = 20
     user_data = file("./src/user-data/install-apache.sh")
-    key_name = aws_key_pair.deployer-key.id
-    private_key = file(var.private_key_path)
 
     # Networking
     vpc_security_group_ids = [aws_security_group.allow_ssh.id]
@@ -60,12 +54,4 @@ module "private_instances" {
     # ASG/ALB Values
     asg_min = 2
     asg_max = 6
-}
-
-###########
-#   SSH   #
-###########
-resource "aws_key_pair" "deployer-key" {
-  key_name   = "deployer-key"
-  public_key = file(var.pub_key_path)
 }

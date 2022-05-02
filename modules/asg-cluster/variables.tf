@@ -15,14 +15,6 @@ variable "user_data" {
     type = string
 }
 
-variable "key_name" {
-    type = string
-}
-
-variable "private_key" {
-    type = string
-}
-
 # Networking
 variable "vpc_security_group_ids" {
     type = list(string)
