@@ -19,3 +19,20 @@ variable "private_key_path" {
     description = "The path from your running directory to the private ssh key file to be passed to the instances"
     type = "string"
 }
+
+variable "profile" {
+    description = "The name of the profile as stated in your AWS Credentials/Config file"
+    type = "string"
+}
+
+variable "shared_config_files" {
+    description = "The path to your .aws config file"
+    type = "string"
+    default = "~/.aws/config"
+}
+
+variable "shared_credentials_files" {
+    description = "The path to your .aws credentials file"
+    type = "string"
+    default = "~/.aws/credentials"
+}
