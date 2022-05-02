@@ -7,7 +7,7 @@ resource "aws_vpc" "main" {
     enable_dns_support = true
     instance_tenancy = "default"
 
-    tags {
+    tags = {
         Name = "cf-assessment-vpc"
     }
 }
@@ -27,7 +27,7 @@ resource "aws_subnet" "sub1" {
     cidr_block = "10.1.0.0/24"
     map_public_ip_on_launch = true
 
-    tags {
+    tags = {
         Name = "Sub1"
     }
 }
@@ -38,7 +38,7 @@ resource "aws_subnet" "sub2" {
     cidr_block = "10.1.1.0/24"
     map_public_ip_on_launch = true
     
-    tags {
+    tags = {
         Name = "Sub2"
     }
 }
@@ -50,7 +50,7 @@ resource "aws_subnet" "sub3" {
     cidr_block = "10.1.2.0/24"
     map_public_ip_on_launch = false
     
-    tags {
+    tags = {
         Name = "Sub3"
     }
 }
@@ -61,7 +61,7 @@ resource "aws_subnet" "sub4" {
     cidr_block = "10.1.3.0/24"
     map_public_ip_on_launch = false
     
-    tags {
+    tags = {
         Name = "Sub4"
     }
 }
@@ -103,7 +103,7 @@ data "http" "icanhazip" {
 }
 
 resource "aws_security_group" "asg-sg" {
-    vpc_id = "${aws_vpc.prod-vpc.id}"
+    vpc_id = "${aws_vpc.main.id}"
     
     egress {
         from_port = 0
@@ -128,7 +128,7 @@ resource "aws_security_group" "asg-sg" {
 }
 
 resource "aws_security_group" "allow_ssh" {
-    vpc_id = "${aws_vpc.prod-vpc.id}"
+    vpc_id = "${aws_vpc.main.id}"
     
     egress {
         from_port = 0
