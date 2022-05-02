@@ -10,3 +10,7 @@ variable "rhel_ami" {
     default = "ami-0b0af3577fe5e3532"
 }
 
+variable "pub_key_path" {
+    description = "The path from your running directory to the public ssh key file to be passed to the instances"
+    type = "string"
+}
